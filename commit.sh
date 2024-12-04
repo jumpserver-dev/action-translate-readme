@@ -1,5 +1,8 @@
 LATEST_COMMIT_MSG=$(git show -s --format='%s')
 
+git config --global user.name 'github-actions[bot]'
+git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
 git add -N .
 
 dir_files=$(ls)
