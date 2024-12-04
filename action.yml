@@ -38,7 +38,7 @@ runs:
         shell: bash
         working-directory: .
         run: |
-          export GPT_API_KEY=${{ inputs.gpt_token }}
+          export OPENAI_API_KEY=${{ inputs.gpt_token }}
           export GPT_MODE=${{ inputs.gpt_mode}}
           export TARGET_LANGUAGES=${{ inputs.target_languages }}
           python $GITHUB_ACTION_PATH/translation.py
