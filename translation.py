@@ -80,6 +80,7 @@ def write_readme(content, lang_code):
         print('Empty content, skip write. {}'.format(lang_code))
         return
     filename = f'./readmes/README.{lang_code}.md'
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, 'w', encoding='utf-8') as f:
         print('Write to:', filename)
         f.write(content)
