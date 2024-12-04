@@ -17,6 +17,7 @@ if [[ $changed_files =~ "readmes/README" ]]; then
         echo "Commit..."
         git add $(git diff --name-only)
         git commit -m "Auto-translate README"
-        git push origin dev:pr@dev@translate_readme
+        git switch pr@dev@translate_readmex
+        git push origin -f -v
     fi
 fi
