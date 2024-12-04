@@ -1,0 +1,6 @@
+name: 'Translate README'
+description: 'Translate the content of the README.md file into multiple languages.'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
