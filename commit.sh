@@ -7,7 +7,6 @@ changed_files=$(git diff --name-only)
 current_branch=$(git branch --show-current)
 
 echo "Current branch $current_branch"
-echo "The current files: $dir_files"
 echo "You auto changed $changed_files"
 
 if [[ $changed_files =~ "readmes/README" ]]; then
