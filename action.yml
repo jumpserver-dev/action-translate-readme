@@ -1,0 +1,52 @@
+name: 'Translate README'
+author: 'Jiangjie Bai'
+description: 'Translate the content of the README.md file into multiple languages.'
+
+branding:
+  icon: 'zap'
+  color: 'green'
+
+inputs:
+  gpt_token:
+    description: 'GPT API token'
+    required: true
+  gpt_mode:
+    description: 'GPT mode'
+    required: false
+    default: 'gpt-4o-mini'
+  target_languages:
+    description: 'Target language code'
+    default: 'zh-hans,zh-hant,ja,pt-br'
+
+runs:
+    using: 'composite'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: dev
+          fetch-depth: 3
+      - name: Set Up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'
+      - name: Install Dependencies
+        shell: bash
+        run: |
+          pip install openai
+      - name: Translate README
+        shell: bash
+        working-directory: .
+        run: |
+          export GPT_API_KEY=${{ inputs.gpt_token }}
+          export GPT_MODE=${{ inputs.gpt_mode}}
+          export TARGET_LANGUAGES=${{ inputs.target_languages }}
+          python $GITHUB_ACTION_PATH/translation.py
+      - name: Git Commit and push
+        shell: bash
+        working-directory: .
+        run: |
+          git config --global user.email "username@users.noreply.github.comm";
+          git config --global user.name "Continuous Integration"
+          chmod +x $GITHUB_ACTION_PATH/commit.sh
+          bash $GITHUB_ACTION_PATH/commit.sh
