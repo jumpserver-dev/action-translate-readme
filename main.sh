@@ -43,7 +43,6 @@ commit_push_github() {
 translate() {
   # 添加 github 认证
   add_remote_github
-  pip install openai
   python translation.py
   commit_push_github
 }
