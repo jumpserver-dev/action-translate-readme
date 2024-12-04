@@ -48,5 +48,3 @@ runs:
         run: |
           chmod +x $GITHUB_ACTION_PATH/commit.sh
           bash $GITHUB_ACTION_PATH/commit.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
