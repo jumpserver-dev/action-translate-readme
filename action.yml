@@ -46,7 +46,7 @@ runs:
         shell: bash
         working-directory: .
         run: |
-          git config --global user.email "username@users.noreply.github.comm";
-          git config --global user.name "Continuous Integration"
           chmod +x $GITHUB_ACTION_PATH/commit.sh
           bash $GITHUB_ACTION_PATH/commit.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
