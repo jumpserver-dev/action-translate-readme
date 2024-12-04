@@ -5,6 +5,7 @@ FROM alpine:3.12
 RUN apk add --no-cache curl jq bash git
 COPY *.sh /
 COPY *.py /
+RUN chmod +x entrypoint.sh
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
 ENTRYPOINT ["/entrypoint.sh"]
