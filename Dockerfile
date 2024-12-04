@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM python:3.12-slim⁠
+FROM python:3.11-slim-bullseye
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 RUN apk add --no-cache curl jq bash git
