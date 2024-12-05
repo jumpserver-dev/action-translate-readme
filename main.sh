@@ -12,7 +12,7 @@ function add_remote_github() {
   remote_url="https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}"
   rm -rf GITHUB_REPO
   git clone "${remote_url}" "GITHUB_REPO" && cd "GITHUB_REPO" || exit 2
-  cp ../translation.py ./
+  cp /translation.py ./
   git status
   git fetch origin
   git remote -v
