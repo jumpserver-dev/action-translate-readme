@@ -17,7 +17,7 @@ default_prompt = """
 TARGET_LANGUAGES = os.environ.get('TARGET_LANGUAGES').split(',')
 GPT_MODE = os.environ.get('GPT_MODE', 'gpt-4o-mini')
 PROMPT = os.environ.get('PROMPT', '')
-if not PROMPT.upper().starswith("REPLACE"):
+if not PROMPT.upper().startswith("REPLACE"):
     PROMPT = default_prompt + PROMPT
 
 GEN_DIR_PATH = os.environ.get('GEN_DIR_PATH') or "./readmes/"
