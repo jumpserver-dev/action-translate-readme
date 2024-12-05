@@ -10,6 +10,7 @@
 
 
 PUSH_BRANCH=${PUSH_BRANCH:-pr@dev@translate_readme}
+GEN_DIR_PATH=${GEN_DIR_PATH:-./readmes/}
 
 function add_remote_github() {
   # Clone仓库
@@ -29,12 +30,12 @@ function commit_push_github() {
   git add -N .
   
   dir_files=$(ls)
-  changed_files=$(git diff --name-only | grep "readmes/")
+  changed_files=$(git diff --name-only | grep ${GEN_DIR_PATH})
   current_branch=$(git branch --show-current)
   
   echo "You auto changed $changed_files"
   
-  if [[ $changed_files =~ "readmes/README" ]]; then
+  if [[ $changed_files =~ ${GEN_DIR_PATH} ]]; then
       if [[ "$LATEST_COMMIT_MSG" != "Auto-translate README" ]]; then
           echo "Commit..."
           git add "${changed_files}"
