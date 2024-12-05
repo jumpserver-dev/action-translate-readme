@@ -22,12 +22,15 @@ function add_remote_github() {
   git status
   git fetch origin
   git remote -v
-  if git rev-parse --verify "${PUSH_BRANCH}" >/dev/null 2>&1; then
-    echo "Branch ${PUSH_BRANCH} already exists. Switching to it..."
-    git switch "${PUSH_BRANCH}"
+
+  if git ls-remote --heads origin | grep -q "refs/heads/$PUSH_BRANCH"; then
+    echo "Remote branch '$PUSH_BRANCH' exists. Creating and tracking locally..."
+    # 创建本地分支并跟踪远程分支
+    git checkout -b "$PUSH_BRANCH" origin/"$PUSH_BRANCH"
   else
-    echo "Branch ${PUSH_BRANCH} does not exist. Creating it..."
-    git switch -c "${PUSH_BRANCH}"
+    echo "Remote branch '$PUSH_BRANCH' does not exist. Creating a new local branch..."
+    # 创建一个新的本地分支
+    git checkout -b "$PUSH_BRANCH"
   fi
 }
 
