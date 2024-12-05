@@ -14,13 +14,13 @@ default_prompt = """
    Output the result in 'markdown code' format.\n
 """
 
-TARGET_LANGUAGES = os.environ.get('TARGET_LANGUAGES').split(',')
+TARGET_LANGUAGES = os.environ.get('TARGET_LANGUAGES', 'zh-hans,zh-hant,ja,pt-br').split(',')
 GPT_MODE = os.environ.get('GPT_MODE', 'gpt-4o-mini')
 PROMPT = os.environ.get('PROMPT', '')
 if not PROMPT.upper().startswith("REPLACE"):
     PROMPT = default_prompt + PROMPT
 
-GEN_DIR_PATH = os.environ.get('GEN_DIR_PATH') or "./readmes/"
+GEN_DIR_PATH = os.environ.get('GEN_DIR_PATH') or "readmes/"
 LANGUAGES_MAPPER = {
     'ja': 'Japanese',
     'zh-hans': 'Simplified Chinese',

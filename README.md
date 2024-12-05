@@ -21,7 +21,7 @@ on:
       prompt:
         description: "AI Translate prompt"
         required: false
-        default: "Do not translate any content under the ‘## License’ section.\n Automatically delete this line: `**English** · [中文(简体)](./readmes/README.zh-hans.md) · [中文(繁體)](./readmes/README.zh-hant.md) · [日本語](./readmes/README.ja.md) · [Português (Brasil)](./readmes/README.pt-br.md)行`\n"
+        default: "Do not translate any content under the ‘## License’ section.\n"
         
       gpt_mode:
         description: "GPT Mode"
