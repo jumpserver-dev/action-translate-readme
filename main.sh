@@ -22,16 +22,17 @@ function add_remote_github() {
   git status
   git fetch origin
   git remote -v
-}
+  if git rev-parse --verify "${PUSH_BRANCH}" >/dev/null 2>&1; then
+    echo "Branch ${PUSH_BRANCH} already exists. Switching to it..."
+    git switch "${PUSH_BRANCH}"
+  else
+    echo "Branch ${PUSH_BRANCH} does not exist. Creating it..."
+    git switch -c "${PUSH_BRANCH}"
+  fi
 
 function commit_push_github() {
   git add .
   git commit -m "Auto-translate README"
-  if git rev-parse --verify "${PUSH_BRANCH}" >/dev/null 2>&1; then
-      echo "Branch ${PUSH_BRANCH} already exists. Deleting and recreating..."
-      git branch -D "${PUSH_BRANCH}" # 删除本地分支
-  fi
-  git switch -c "${PUSH_BRANCH}"
   echo "Pushing to branch ${PUSH_BRANCH}..."
   git push origin -f -v "${PUSH_BRANCH}"
 }
