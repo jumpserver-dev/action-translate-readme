@@ -10,7 +10,7 @@
 
 
 PUSH_BRANCH=${PUSH_BRANCH:-pr@dev@translate_readme}
-GEN_DIR_PATH=${GEN_DIR_PATH:-./readmes/}
+GEN_DIR_PATH=${GEN_DIR_PATH:-readmes/}
 
 function add_remote_github() {
   # Clone仓库
