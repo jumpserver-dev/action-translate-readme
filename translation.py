@@ -97,6 +97,8 @@ def write_readme(content, lang_code):
 async def main():
     source_readme = read_readme()
     for lang_code in TARGET_LANGUAGES:
+        if not lang_code:
+            continue
         lang = LANGUAGES_MAPPER.get(lang_code, lang_code)
         translated_readme = await translate(source_readme, lang)
         write_readme(translated_readme, lang_code)
