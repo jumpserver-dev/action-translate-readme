@@ -29,6 +29,7 @@ function add_remote_github() {
     echo "Branch ${PUSH_BRANCH} does not exist. Creating it..."
     git switch -c "${PUSH_BRANCH}"
   fi
+}
 
 function commit_push_github() {
   git add .
