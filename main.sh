@@ -29,19 +29,18 @@ function commit_push_github() {
   
   git add -N .
   
-  dir_files=$(ls)
-  changed_files=$(git diff --name-only | grep ${GEN_DIR_PATH})
+  changed_files=$(git diff --name-only | grep "${GEN_DIR_PATH}")
   current_branch=$(git branch --show-current)
   
   echo "You auto changed $changed_files"
   
-  if [[ $changed_files =~ ${GEN_DIR_PATH} ]]; then
+  if [[ $changed_files =~ "${GEN_DIR_PATH}" ]]; then
       if [[ "$LATEST_COMMIT_MSG" != "Auto-translate README" ]]; then
           echo "Commit..."
           git add "${changed_files}"
           git commit -m "Auto-translate README"
-          git switch -c ${PUSH_BRANCH}
-          git push origin -f -v ${PUSH_BRANCH} 
+          git switch -c "${PUSH_BRANCH}"
+          git push origin -f -v "${PUSH_BRANCH}"
       fi
   fi
 }
