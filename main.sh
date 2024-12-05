@@ -5,6 +5,7 @@
 # GPT_MODE
 # TARGET_LANGUAGES
 # PUSH_BRANCH
+# PROMPT
 
 
 PUSH_BRANCH=${PUSH_BRANCH:-pr@dev@translate_readme}
