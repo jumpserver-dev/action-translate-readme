@@ -11,6 +11,7 @@ default_prompt = """
    4. Display all punctuation marks and parentheses in half-width characters.\n
    5. Avoid translate the text in code block or inline code.\n
    6. Avoid using the ```markdown ``` code block notation.\n
+   7. Do not translate any content under the '## License' section.\n
    Output the result in 'markdown code' format.\n
 """
 

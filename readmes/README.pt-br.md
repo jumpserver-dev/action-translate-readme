@@ -1,30 +1,30 @@
-# Translate github README.md to other languages
+# Traduzir github README.md para outros idiomas
 
-Set up your repository workflow such as:
+Configure o fluxo de trabalho do seu repositório da seguinte forma:
 ```
-name: Translate README
+name: Traduzir README
 on:
   workflow_dispatch:
     inputs:
       target_langs:
-        description: "Target Languages"
+        description: "Idiomas Alvo"
         required: false
         default: "zh-hans,zh-hant,ja,pt-br"
       gen_dir_path:
-        description: "Generate Dir Name"
+        description: "Nome do Diretório Gerado"
         required: false
         default: "readmes/"
       push_branch:
-        description: "Push Branch"
+        description: "Ramo para Push"
         required: false
         default: "pr@dev@translate_readme"
       prompt:
-        description: "AI Translate prompt"
+        description: "Prompt para Tradução da IA"
         required: false
         default: ""
         
       gpt_mode:
-        description: "GPT Mode"
+        description: "Modo GPT"
         required: false
         default: "gpt-4o-mini"
 
@@ -32,7 +32,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Auto Translate
+      - name: Tradução Automática
         uses: BaiJiangJie/translate-readme@main
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}

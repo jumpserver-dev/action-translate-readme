@@ -1,30 +1,30 @@
-# Translate github README.md to other languages
+# 將 github README.md 翻譯成其他語言
 
-Set up your repository workflow such as:
+設置您的倉庫工作流程，例如：
 ```
-name: Translate README
+name: 翻譯 README
 on:
   workflow_dispatch:
     inputs:
       target_langs:
-        description: "Target Languages"
+        description: "目標語言"
         required: false
         default: "zh-hans,zh-hant,ja,pt-br"
       gen_dir_path:
-        description: "Generate Dir Name"
+        description: "生成目錄名稱"
         required: false
         default: "readmes/"
       push_branch:
-        description: "Push Branch"
+        description: "推送分支"
         required: false
         default: "pr@dev@translate_readme"
       prompt:
-        description: "AI Translate prompt"
+        description: "AI 翻譯提示"
         required: false
         default: ""
         
       gpt_mode:
-        description: "GPT Mode"
+        description: "GPT 模式"
         required: false
         default: "gpt-4o-mini"
 
@@ -32,7 +32,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Auto Translate
+      - name: 自動翻譯
         uses: BaiJiangJie/translate-readme@main
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_TOKEN }}
