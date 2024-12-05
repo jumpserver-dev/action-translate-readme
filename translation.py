@@ -12,6 +12,7 @@ default_prompt = """
    5. Avoid translate the text in code block or inline code.\n
    6. Avoid using the ```markdown ``` code block notation.\n
    7. Do not translate any content under the '## License' section.\n
+   8. Do not translate the contents of the div tag\n
    Output the result in 'markdown code' format.\n
 """
 
