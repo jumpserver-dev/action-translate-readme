@@ -2,9 +2,22 @@ import os
 import asyncio
 from openai import AsyncOpenAI
 
+default_prompt = """
+   Translate the following markdown context to [{target_lang}],
+   adhere to the following rules:\n
+   1. Maintain the original format, symbols, and spacing of the text.\n 
+   2. Only provide me with the translated text result, without any descriptions.\n
+   3. Translate all the content of the text accurately, preserving line breaks.\n
+   4. Display all punctuation marks and parentheses in half-width characters.\n
+   5. Avoid translate the text in code block or inline code.\n
+   6. Avoid using the ```markdown ``` code block notation.\n
+   Output the result in 'markdown code' format:\n
+"""
+
 TARGET_LANGUAGES = os.environ.get('TARGET_LANGUAGES').split(',')
 GPT_MODE = os.environ.get('GPT_MODE', 'gpt-4o-mini')
-
+PROMPT = os.environ.get('PROMPT', default_prompt)
+                        
 LANGUAGES_MAPPER = {
     'ja': 'Japanese',
     'zh-hans': 'Simplified Chinese',
@@ -34,17 +47,7 @@ class OpenAITranslate:
         self.client = AsyncOpenAI(api_key=key, base_url=base_url)
 
     async def translate_md(self, text, target_lang="English", model='gpt-4o-mini') -> str | None:
-        prompt = f"""
-           Translate the following markdown context to [{target_lang}],
-           adhere to the following rules:\n
-           1. Maintain the original format, symbols, and spacing of the text.\n 
-           2. Only provide me with the translated text result, without any descriptions.\n
-           3. Translate all the content of the text accurately, preserving line breaks.\n
-           4. Display all punctuation marks and parentheses in half-width characters.\n
-           5. Avoid translate the text in code block or inline code.\n
-           6. Avoid using the ```markdown ``` code block notation.\n
-           Output the result in 'markdown code' format:\n
-        """
+        prompt = PROMPT.format(target_lang=target_lang)
         try:
             response = await self.client.chat.completions.create(
                 messages=[
