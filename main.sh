@@ -6,6 +6,7 @@
 # TARGET_LANGUAGES
 # PUSH_BRANCH
 # PROMPT
+# GEN_DIR_PATH
 
 
 PUSH_BRANCH=${PUSH_BRANCH:-pr@dev@translate_readme}
