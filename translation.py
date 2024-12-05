@@ -16,8 +16,8 @@ default_prompt = """
 
 TARGET_LANGUAGES = os.environ.get('TARGET_LANGUAGES').split(',')
 GPT_MODE = os.environ.get('GPT_MODE', 'gpt-4o-mini')
-PROMPT = os.environ.get('PROMPT', default_prompt)
-                        
+PROMPT = os.environ.get('PROMPT') or default_prompt
+GEN_DIR_PATH = os.environ.get('GEN_DIR_PATH') or "./readmes/"
 LANGUAGES_MAPPER = {
     'ja': 'Japanese',
     'zh-hans': 'Simplified Chinese',
@@ -82,7 +82,7 @@ def write_readme(content, lang_code):
     if not content:
         print('Empty content, skip write. {}'.format(lang_code))
         return
-    filename = f'./readmes/README.{lang_code}.md'
+    filename = os.path.join(GEN_DIR_PATH, f"README.{lang_code}.md")
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, 'w', encoding='utf-8') as f:
         print('Write to:', filename)
