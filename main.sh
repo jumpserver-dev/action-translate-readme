@@ -12,6 +12,7 @@ function add_remote_github() {
   remote_url="https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}"
   rm -rf GITHUB_REPO
   git clone "${remote_url}" "GITHUB_REPO" && cd "GITHUB_REPO" || exit 2
+  cp ../translation.py ./
   git status
   git fetch origin
   git remote -v
@@ -23,7 +24,7 @@ commit_push_github() {
   git add -N .
   
   dir_files=$(ls)
-  changed_files=$(git diff --name-only)
+  changed_files=$(git diff --name-only | grep "readmes/")
   current_branch=$(git branch --show-current)
   
   echo "Current branch $current_branch"
