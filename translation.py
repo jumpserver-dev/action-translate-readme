@@ -11,12 +11,15 @@ default_prompt = """
    4. Display all punctuation marks and parentheses in half-width characters.\n
    5. Avoid translate the text in code block or inline code.\n
    6. Avoid using the ```markdown ``` code block notation.\n
-   Output the result in 'markdown code' format:\n
+   Output the result in 'markdown code' format.\n
 """
 
 TARGET_LANGUAGES = os.environ.get('TARGET_LANGUAGES').split(',')
 GPT_MODE = os.environ.get('GPT_MODE', 'gpt-4o-mini')
-PROMPT = os.environ.get('PROMPT') or default_prompt
+PROMPT = os.environ.get('PROMPT', '')
+if not PROMPT.upper().starswith("REPLACE"):
+    PROMPT = default_prompt + PROMPT
+
 GEN_DIR_PATH = os.environ.get('GEN_DIR_PATH') or "./readmes/"
 LANGUAGES_MAPPER = {
     'ja': 'Japanese',
