@@ -25,37 +25,15 @@ function add_remote_github() {
 }
 
 function commit_push_github() {
-  LATEST_COMMIT_MSG=$(git show -s --format='%s')
-  
-  # 检查更改文件是否匹配 GEN_DIR_PATH
-  changed_files=$(git diff --name-only | grep -E "^${GEN_DIR_PATH}")
-
-  if [[ -n "$changed_files" ]]; then
-      echo "Detected changes in files: $changed_files"
-      
-      if [[ "$LATEST_COMMIT_MSG" != "Auto-translate README" ]]; then
-          echo "Staging changes..."
-          echo "$changed_files" | xargs git add
-
-          echo "Committing changes..."
-          git commit -m "Auto-translate README"
-          
-          # 确保分支存在，或删除并切换到新分支
-          if git rev-parse --verify "${PUSH_BRANCH}" >/dev/null 2>&1; then
-              echo "Branch ${PUSH_BRANCH} already exists. Deleting and recreating..."
-              git branch -D "${PUSH_BRANCH}" # 删除本地分支
-          fi
-          git switch -c "${PUSH_BRANCH}"
-
-          # 推送到远程分支
-          echo "Pushing to branch ${PUSH_BRANCH}..."
-          git push origin -f -v "${PUSH_BRANCH}"
-      else
-          echo "No commit made: latest commit message matches expected message."
-      fi
-  else
-      echo "No changes detected in ${GEN_DIR_PATH}. Skipping commit."
+  git add .
+  git commit -m "Auto-translate README"
+  if git rev-parse --verify "${PUSH_BRANCH}" >/dev/null 2>&1; then
+      echo "Branch ${PUSH_BRANCH} already exists. Deleting and recreating..."
+      git branch -D "${PUSH_BRANCH}" # 删除本地分支
   fi
+  git switch -c "${PUSH_BRANCH}"
+  echo "Pushing to branch ${PUSH_BRANCH}..."
+  git push origin -f -v "${PUSH_BRANCH}"
 }
 
 function translate() {
@@ -63,6 +41,7 @@ function translate() {
   add_remote_github
   cp /translation.py ./
   python translation.py
+  rm -rf translation.py
   commit_push_github
 }
 
