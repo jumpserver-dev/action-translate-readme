@@ -16,6 +16,7 @@ default_prompt = """
    Output the result in 'markdown code' format.\n
 """
 
+SOURCE_README = os.environ.get('SOURCE_README', './README.md')
 TARGET_LANGUAGES = os.environ.get('TARGET_LANGUAGES', 'zh-hans,zh-hant,ja,pt-br').split(',')
 GPT_MODE = os.environ.get('GPT_MODE', 'gpt-4o-mini')
 PROMPT = os.environ.get('PROMPT', '')
@@ -68,8 +69,8 @@ class OpenAITranslate:
 
 
 def read_readme():
-    with open('./README.md', 'r', encoding='utf-8') as f:
-        print('Read from:', './README.md')
+    with open(SOURCE_README, 'r', encoding='utf-8') as f:
+        print('Read from:', SOURCE_README)
         content = f.read()
         return content
 
